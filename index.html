@@ -20,7 +20,14 @@
     <meta http-equiv="Expires" content="0">
     <script>
         var urls = [
-        {
+            {
+                id: 'quadro',
+                titulo: 'Quadro Javalis',
+                tribo: 'javalis',            
+                url: "subpages/blank.html",
+                show: true
+            },
+            {
                 id: 'ritos',
                 titulo: 'Ritos Javalis',
                 tribo: 'javalis',
@@ -79,40 +86,47 @@
         ];
         var i = urls.findIndex(i => i.show);
         var currentTribo = "";
-        function redirect_url() {          
-
-                var footers = document.getElementsByClassName("footer-section");
-                for(footer of footers) {
-                    footer.classList.remove("active");
-                }
-
-                var footers = document.getElementsByClassName("footer-section fadeinRight");
-                for(footer of footers) {
-                    footer.classList.remove("fadeinRight");
-                    footer.classList.add("fadeoutRight");
-                }
-
-                var footerSection = document.getElementById("footer-"+urls[i].id);     
-                    footerSection.classList.add("fadeinRight");
-                    footerSection.classList.add("active");
-                if(urls[i].show) {
-                    var frameElement = document.getElementById("frame");
-                    frameElement.src = urls[i].url;
-                    frameElement.contentWindow.location.href = frameElement.src;
-
-                    setTimeout(function () {
-                        i = (i + 1) % urls.length;
-                        redirect_url();
-                    }, 30* 1000);
-                } else {
-                    setTimeout(function () {
-                        i = (i+1) % urls.length;
-                        redirect_url();
-                    }, 3 * 100);
-                }
-                
+        function redirect_url() { 
+            var quadro = document.getElementById("quadro");
+            if(urls[i].id === "quadro"){
+                quadro.classList.remove('hidden');
+            }         
+            else {                
+                quadro.classList.add('hidden');
+            }
+            var footers = document.getElementsByClassName("footer-section");
+            for(footer of footers) {
+                footer.classList.remove("active");
+            }
             
+            var footers = document.getElementsByClassName("footer-section fadeinRight");
+            for(footer of footers) {
+                footer.classList.remove("fadeinRight");
+                footer.classList.add("fadeoutRight");
+            }
+            if(urls[i].id !== "quadro") {
+            var footerSection = document.getElementById("footer-"+urls[i].id);     
+                footerSection.classList.add("fadeinRight");
+                footerSection.classList.add("active");
+            }
+                
+            if(urls[i].show) {
+                var frameElement = document.getElementById("frame");
+                frameElement.src = urls[i].url;
+                frameElement.contentWindow.location.href = frameElement.src;
+
+                setTimeout(function () {
+                    i = (i + 1) % urls.length;
+                    redirect_url();
+                }, 3 * 1000);
+            } else {
+                setTimeout(function () {
+                    i = (i+1) % urls.length;
+                    redirect_url();
+                }, 3 * 100);
+            }
         }
+                
     </script>
 </head>
 
@@ -233,16 +247,29 @@
         height: 1.3em;
         width: 25%;
     }
+
+    .quadro {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .quadro.hidden {
+        display: none;
+    }
 </style>
 
 <body onload="redirect_url()">
-
+    
     <div class="bg">
             <div class="header-content" id="header-frame">
                 <div class="header-section" id="header-javalis">
                     <div class="header-img-wrapper"><img src="img/header-javalis.png"></div>
                 </div>
             </div>
+            <div class="quadro" id="quadro"><img src="img/quadro-jvl.png"></div>
             <div class="blank-content">
                 <iframe id="frame" frameborder="0"  scrolling="no" style="height:100%;width:100%;top:0px;left:0px;right:0px;bottom:0px;"
                     height="100%" width="100%"></iframe>
