@@ -25,22 +25,22 @@
                 titulo: 'Ritos Javalis',
                 tribo: 'javalis',
                 url: "subpages/ritos-javalis.html",
-                show: true
+                show: false
             },
-            {
+           /*  {
                 id: 'ritos',
                 titulo: 'Ritos Javalis - Localiza',
                 tribo: 'javalis',
                 url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQk9bPzyaZ-zuR1iazktzgY18D_2ZERRL9zI3ibxmHjGlT6cQ5_DkVoe2Ig-kyG-J8o3a9GLf_P9xB7/pubhtml?gid=2126274174&single=true&chrome=false",
-                show: true
+                show: false
             },
             {
                 id: 'ritos',
                 titulo: 'Ritos Javalis - VLi',
                 tribo: 'javalis',
                 url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQk9bPzyaZ-zuR1iazktzgY18D_2ZERRL9zI3ibxmHjGlT6cQ5_DkVoe2Ig-kyG-J8o3a9GLf_P9xB7/pubhtml?gid=1417231095&single=true&chrome=false",
-                show: true
-            },
+                show: false
+            }, */
             {
                 id: 'oneone',
                 titulo: '1-1 Javalis',
@@ -75,77 +75,11 @@
                 tribo: 'javalis',
                 url: "subpages/aniversarios-javalis.html",
                 show: true
-            },
-            {
-                id: 'ritos',
-                titulo: 'Ritos Suricatos',
-                tribo: 'suricatos',
-                url: "",
-                show: false
-            },
-            {
-                id: 'oneone',
-                titulo: '1-1 Suricatos',
-                tribo: 'suricatos',
-                url: "subpages/1-1-suricatos-frame.html",
-                show: true
-            },
-            {
-                id: 'okrs',
-                titulo: 'OKRs Suricatos',
-                tribo: 'suricatos',
-                url: "",
-                show: false
-            },
-            {
-                id: 'burndown',
-                titulo: 'Burndown Suricatos',
-                tribo: 'suricatos',
-                url: "subpages/burndown_fca.html",
-                show: true
-            },
-            {
-                id: 'eventos',
-                titulo: 'Eventos Suricatos',
-                tribo: 'suricatos',
-                url: "subpages/eventos-suricatos.html",
-                show: true
-            },
-            {
-                id: 'aniversarios',
-                titulo: 'Aniversários Suricatos',
-                tribo: 'suricatos',
-                url: "subpages/aniversarios-suricatos.html",
-                show: true
             }
         ];
-        var i = 0;
+        var i = urls.findIndex(i => i.show);
         var currentTribo = "";
-        function redirect_url() {            
-            // urlsShow = urls.filter(element => element.show);
-            console.log(urls);
-                if (urls[i].tribo !== currentTribo) {
-                    currentTribo = urls[i].tribo;
-                    if (currentTribo === "javalis") {
-                        var headerSection = document.getElementById("header-suricatos");                        
-                        headerSection.classList.remove("fadeinRight");
-                        headerSection.classList.add("fadeoutLeft");
-                        headerSection.classList.remove("active");
-                        var headerSection = document.getElementById("header-javalis");                     
-                        headerSection.classList.remove("fadeoutRight");
-                        headerSection.classList.add("fadeinLeft");  
-                        headerSection.classList.add("active");    
-                    } else {
-                        var headerSection = document.getElementById("header-suricatos");                       
-                        headerSection.classList.remove("fadeoutLeft");
-                        headerSection.classList.add("fadeinRight");
-                        headerSection.classList.add("active");
-                        var headerSection = document.getElementById("header-javalis");                        
-                        headerSection.classList.remove("fadeinLeft");
-                        headerSection.classList.add("fadeoutRight");
-                        headerSection.classList.remove("active"); 
-                    }
-                }
+        function redirect_url() {          
 
                 var footers = document.getElementsByClassName("footer-section");
                 for(footer of footers) {
@@ -159,7 +93,6 @@
                 }
 
                 var footerSection = document.getElementById("footer-"+urls[i].id);     
-                    console.log(footerSection);  
                     footerSection.classList.add("fadeinRight");
                     footerSection.classList.add("active");
                 if(urls[i].show) {
@@ -170,12 +103,12 @@
                     setTimeout(function () {
                         i = (i + 1) % urls.length;
                         redirect_url();
-                    }, 30 * 1000);
+                    }, 30* 1000);
                 } else {
                     setTimeout(function () {
-                        i = (i + 1) % urls.length;
+                        i = (i+1) % urls.length;
                         redirect_url();
-                    }, 30 * 10);
+                    }, 3 * 100);
                 }
                 
             
@@ -229,9 +162,9 @@
     }
 
     .header-section {
-        width: 50%;
+        width: 100%;
         display: flex;
-        background-color: #f8cfaf;
+        background-color: #f16300;
     }
 
     .footer-section {
@@ -294,6 +227,12 @@
         margin: auto;
         height: 1.3em;
     }
+
+    .header-img-wrapper {
+        margin: auto;
+        height: 1.3em;
+        width: 25%;
+    }
 </style>
 
 <body onload="redirect_url()">
@@ -301,10 +240,7 @@
     <div class="bg">
             <div class="header-content" id="header-frame">
                 <div class="header-section" id="header-javalis">
-                    <div class="content-text">javalis</div>
-                </div>
-                <div class="header-section" id="header-suricatos">
-                        <div class="content-text">suricatos</div>
+                    <div class="header-img-wrapper"><img src="img/header-javalis.png"></div>
                 </div>
             </div>
             <div class="blank-content">
